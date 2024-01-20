@@ -1,0 +1,54 @@
+<%- include("partials/header.ejs") %>
+    <div id="quizzie" class="content">
+        <h1>QuizWeb</h1>
+        <div class="userStatus">
+            <%- include("partials/lives.ejs") %>
+            <% if(locals.difficulty) {%>
+                <div class="difficulty">
+                    <%- difficulty %>
+                </div>
+            <% } %>
+            <%- include("partials/score.ejs") %>
+        </div>
+    
+        <% if(locals.showquestion) {%>
+        <ul class="quiz-step step1 current">
+            <li class="question">
+                <div class="question-wrap">
+                    <h2><%- locals.question %></h2>
+                </div>
+            </li>     
+            <div class="answer-container">                
+                    <% if(locals.options) { %>
+                        <% for (var i = 0; i < options.length; i++) { %>
+                            <div class="caixa">                        
+                                <li class="quiz-answer low-value">
+                                    <form action="/result" method="POST">
+                                        <div class="answer-wrap item">                                            
+                                            <button class="btn" formaction="/result" type="submit" name="selected" value=<%- JSON.stringify(options[i]) %>><p class="categoryLabel"><%- JSON.stringify(options[i]) %></p></button>                        
+                                        </div>   
+                                    </form> 
+                                </li>                        
+                            </div>  
+                        <% } %>
+                    <% } %>                                   
+            </div>                
+        </ul> 
+        <% } %>
+        
+        <% if (locals.content) {%>
+            <div class="">
+                <p> <%- content %></p>
+                
+                <% if (locals.goHome) {%>
+                    <form class="myForm" action="/home" method="POST">
+                        <div >                                            
+                            <button class="btn" formaction="/home" type="submit" name="selected" value=""><p class="categoryLabel">New Quiz</p></button>                        
+                        </div>   
+                    </form> 
+                <% } %>
+            </div>
+        <% } %>
+
+      </div>
+<%- include("partials/footer.ejs") %>

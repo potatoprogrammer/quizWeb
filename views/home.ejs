@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs") %>
+<div class="homecontent">
+    <h1>QuizWeb</h1>
+    <h2>Difficulty</h2>
+    <form class="myForm" action="/question" method="POST">  
+        <div class="switch-field">
+            <input type="radio" id="radio-one" name="difficulty" value="easy"  checked/>
+            <label for="radio-one">Easy</label>
+            <input type="radio" id="radio-two" name="difficulty" value="medium" />
+            <label for="radio-two">Medium</label>
+            <input type="radio" id="radio-three" name="difficulty" value="hard" />
+            <label for="radio-three">Hard</label>
+        </div>
+        <h2>Category</h2>
+        <div class="categories">    
+            <% if (locals.categories) {%>            
+                <% for (var i = 0; i < categories.length; i++) { %>
+                    <div class="category">                                  
+                        <button class="categorybtn" formaction="/question" type="submit" name="id" value=<%= categories[i].id %>><p class="categoryLabel"><%= categories[i].name %></p></button>                        
+                    </div>
+                <% } %>            
+            <% } %>
+        </div>
+    </form> 
+</div>
+<%- include("partials/footer.ejs") %>
